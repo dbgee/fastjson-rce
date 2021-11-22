@@ -12,3 +12,8 @@ Exploit.java  编译好的class 文件文件和利用工具在Exploit 目录下
 update info：
 
 对于数据做了持久化处理
+
+##使用步骤
+* java -jar xxx.jar // 运行springboot 可执行程序
+* 启用利用工具
+* 发送利用payload
