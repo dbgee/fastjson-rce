@@ -3,38 +3,52 @@ package com.kk.controller;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.kk.dao.UserDao;
 import com.kk.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class UserController {
     Logger logger= LoggerFactory.getLogger(UserController.class);
-    User user1=new User(1001,"刘备",20);
-    User user2=new User(1002,"关羽",18);
-    User user3=new User(1003,"张飞",16);
+
+    @Autowired
+    UserDao userDao;
+
+    @RequestMapping("/addUser")
+    @ResponseBody
+    public JSONObject addUser(@RequestBody User user){
+        logger.info("user:{}",user);
+        user.setId(user.getId());
+        userDao.save(user);
+
+        JSONObject result=new JSONObject();
+        result.put("msg","success");
+        result.put("code","200");
+        result.put("data",user);
+
+        return result;
+    }
 
     @RequestMapping("/list")
     @ResponseBody
-    public JSONObject list(){
+    public JSONObject findAll(){
+        List<User> users= (List<User>) userDao.findAll();
+
         JSONObject result=new JSONObject();
-
-        List<User> userList=new ArrayList<>();
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-
         result.put("msg","success");
-        result.put("code",200);
-        result.put("data",userList);
+        result.put("code","200");
+        result.put("data",users);
 
         return result;
     }
@@ -43,7 +57,7 @@ public class UserController {
     @ResponseBody
     public String list2(){
         // 对象转字符
-        String userdata=JSON.toJSONString(user2);
+        String userdata=JSON.toJSONString(null);
         return userdata;
     }
 
@@ -79,6 +93,45 @@ public class UserController {
         result.put("code",200);
         result.put("url",url);
         result.put("data",data);
+        return result;
+    }
+
+    @RequestMapping("/findUserById")
+    @ResponseBody
+    public JSONObject findUserById(Long id){
+        User user=userDao.findUserById(id);
+
+        JSONObject result=new JSONObject();
+        result.put("msg","success");
+        result.put("code","200");
+        result.put("data",user);
+
+        return result;
+    }
+
+    @RequestMapping("/findUserByName")
+    @ResponseBody
+    public JSONObject findUserByName(String name){
+        List<User> users=userDao.findUserByName(name);
+
+        JSONObject result=new JSONObject();
+        result.put("msg","success");
+        result.put("code","200");
+        result.put("data",users);
+
+        return result;
+    }
+
+    @RequestMapping("/findUserByAge")
+    @ResponseBody
+    public JSONObject findUserByAge(int age){
+        List<User> users=userDao.findUserByAge(age);
+
+        JSONObject result=new JSONObject();
+        result.put("msg","success");
+        result.put("code","200");
+        result.put("data",users);
+
         return result;
     }
 
