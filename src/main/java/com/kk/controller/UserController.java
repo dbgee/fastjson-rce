@@ -27,9 +27,10 @@ public class UserController {
 
     @RequestMapping("/addUser")
     @ResponseBody
-    public JSONObject addUser(@RequestBody User user){
+    public JSONObject addUser(@RequestBody String data){
+        User user=JSON.parseObject(data,User.class);
         logger.info("user:{}",user);
-        user.setId(user.getId());
+//        user.setId(user.getId());
         userDao.save(user);
 
         JSONObject result=new JSONObject();
