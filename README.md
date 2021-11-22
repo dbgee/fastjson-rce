@@ -1,4 +1,8 @@
 # fastjson-rce
+![](https://img.shields.io/badge/language-java-yellow)
+![](https://img.shields.io/github/stars/dbgee/fastjson-rce)
+![](https://img.shields.io/github/workflow/status/dbgee/fastjson-rce/Maven%20Package)
+
 fastjson rce env based on springboot
 
 Exploit.java  编译好的class 文件文件和利用工具在Exploit 目录下
