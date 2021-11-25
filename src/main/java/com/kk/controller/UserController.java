@@ -25,13 +25,18 @@ public class UserController {
     @Autowired
     UserDao userDao;
 
+    @RequestMapping("/")
+    public String showIndex(){
+        return "index.html";
+    }
+
     @RequestMapping("/addUser")
     @ResponseBody
     public JSONObject addUser(@RequestBody String data){
+        logger.info("data:{}",data);
         User user=JSON.parseObject(data,User.class);
-        logger.info("user:{}",user);
 //        user.setId(user.getId());
-        userDao.save(user);
+            userDao.save(user);
 
         JSONObject result=new JSONObject();
         result.put("msg","success");
@@ -39,6 +44,13 @@ public class UserController {
         result.put("data",user);
 
         return result;
+    }
+
+    @RequestMapping("/del")
+    @ResponseBody
+    public JSONObject delById(@RequestParam(value = "id",required = true,defaultValue = "0")Long id){
+        userDao.deleteById(id);
+        return null;
     }
 
     @RequestMapping("/list")
