@@ -10,7 +10,7 @@
     </parent>
     <groupId>fastjson-rce</groupId>
     <artifactId>fastjson-rce</artifactId>
-    <version>v1.0.0</version>
+    <version>v1.1.0</version>
     <name>fastjson-rce</name>
     <description>spring boot env for fastjson rce vulnerability</description>
     <properties>

